@@ -8,6 +8,8 @@ const port = process.env.PORT || 5000;
 
 const jobsRouter = require("./routers/jobs.router");
 const applyRouter = require("./routers/apply.route");
+const userRouter = require("./routers/user.route");
+const adminRouter = require("./routers/admin.route");
 
 app.use(cors());
 app.use(express.json());
@@ -24,9 +26,11 @@ mongoose
 
 app.use("/", jobsRouter);
 app.use("/jobs", applyRouter);
+app.use("/user", userRouter);
+app.use("/admin", adminRouter);
 
 app.get("/", (req, res) => {
-  res.send("Job Portal");
+  res.send("Job Portal Api Ready...!");
 });
 
 app.listen(port, () => {

@@ -46,7 +46,7 @@ const jobSchema = new Schema(
         },
       },
     },
-    category: {
+    jobType: {
       type: String,
       required: true,
     },
