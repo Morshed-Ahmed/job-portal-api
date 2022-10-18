@@ -4,7 +4,9 @@ const jobController = require("../controllers/job.controller");
 const authorization = require("../middleware/authorization");
 const verifyToken = require("../middleware/verifyToken");
 
-router.route("/jobs").post(jobController.createJob);
+router
+  .route("/jobs")
+  .post(verifyToken, authorization("hiring-manager"), jobController.createJob);
 router
   .route("/manager/jobs")
   .get(verifyToken, authorization("admin"), jobController.getJobs);

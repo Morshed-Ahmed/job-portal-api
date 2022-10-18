@@ -24,13 +24,13 @@ const jobSchema = new Schema(
       type: String,
       required: true,
     },
-    duration: {
+    jobType: {
       type: String,
       required: true,
       enum: {
-        values: ["hours", "week", "month", "year", "fulltime"],
+        values: ["fulltime", "part-time", "remote-job", "freelancer"],
         message:
-          "unit value can't be {VALUE}, must be hours/week/month/year/fulltime",
+          "unit value can't be {VALUE}, must be fulltime/part-time/remote-job/freelancer",
       },
     },
     status: {
@@ -46,9 +46,20 @@ const jobSchema = new Schema(
         },
       },
     },
-    jobType: {
+    jobCategory: {
       type: String,
       required: true,
+      enum: {
+        values: [
+          "software",
+          "finance",
+          "recruiting",
+          "management",
+          "advertising",
+        ],
+        message:
+          "unit value can't be {VALUE}, must be software/finance/recruiting/management/advertising",
+      },
     },
     address: {
       type: String,
@@ -65,7 +76,7 @@ const jobSchema = new Schema(
     workplace: {
       type: String,
       required: true,
-      enum: ["intern", "in-office"],
+      enum: ["on-site", "remote", "hybrid"],
     },
     applyLastDate: {
       type: Date,
