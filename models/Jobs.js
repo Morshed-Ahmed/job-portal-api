@@ -4,6 +4,14 @@ const validator = require("validator");
 
 const jobSchema = new Schema(
   {
+    email: {
+      type: String,
+      validate: [validator.isEmail, "Provide a valid Email"],
+      trim: true,
+      lowercase: true,
+      unique: true,
+      required: [true, "Email address is required"],
+    },
     companyName: {
       type: String,
       required: true,

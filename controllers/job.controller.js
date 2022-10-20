@@ -22,7 +22,9 @@ exports.createJob = async (req, res) => {
 
 exports.getJobs = async (req, res) => {
   try {
-    const job = await getJobService(req.body);
+    const { email } = req.params;
+    // console.log(email);
+    const job = await getJobService(email);
     res.status(200).json({
       status: "Success",
       data: job,

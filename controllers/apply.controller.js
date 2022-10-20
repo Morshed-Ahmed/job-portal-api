@@ -21,6 +21,49 @@ exports.getJobs = async (req, res) => {
   }
 };
 
+// exports.getJobsDate = async (req, res) => {
+//   try {
+//     // const job = await Jobs.find({
+//     //   $where: 'this.created_on.toJSON().slice(0, 10) == "2012-07-14"',
+//     // });
+//     res.status(200).json({
+//       status: "Success",
+//       // data: job,
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       status: "Fail",
+//       massage: error.message,
+//     });
+//   }
+// };
+
+exports.getJobsDate = async (req, res) => {
+  try {
+    const { dateQuery } = req.params;
+    const date = new Date(dateQuery);
+    // console.log(date);
+    const today = date.toLocaleDateString(`fr-CA`).split("/").join("-");
+    // console.log(today);
+    const job = await Jobs.find({
+      createdAt: {
+        $gte: `${today}T00:00:00.000Z`,
+        $lt: `${today}T23:59:59.000Z`,
+      },
+    });
+
+    res.status(200).json({
+      status: "Success",
+      data: job,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "Fail",
+      massage: error.message,
+    });
+  }
+};
+
 exports.findJobById = async (req, res) => {
   try {
     const { id } = req.params;

@@ -8,8 +8,8 @@ router
   .route("/jobs")
   .post(verifyToken, authorization("hiring-manager"), jobController.createJob);
 router
-  .route("/manager/jobs")
-  .get(verifyToken, authorization("admin"), jobController.getJobs);
+  .route("/manager/jobs/:email")
+  .get(verifyToken, authorization("hiring-manager"), jobController.getJobs);
 router.route("/manager/jobs/:id").get(jobController.findJobById);
 router.route("/jobs/:id").patch(jobController.updateJob);
 

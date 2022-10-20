@@ -5,8 +5,8 @@ exports.createJobService = async (jobInfo) => {
   return job;
 };
 
-exports.getJobService = async () => {
-  const job = await Jobs.find({});
+exports.getJobService = async (email) => {
+  const job = await Jobs.find({ email });
   return job;
 };
 

@@ -5,6 +5,7 @@ const authorization = require("../middleware/authorization");
 const verifyToken = require("../middleware/verifyToken");
 
 router.route("/").get(applyController.getJobs);
+router.route("/date/:dateQuery").get(applyController.getJobsDate);
 router.route("/:id").get(applyController.findJobById);
 router
   .route("/:id/apply")
