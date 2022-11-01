@@ -11,6 +11,9 @@ const applySchema = new Schema(
     //   required: true,
     //   ref: "User",
     // },
+    postId: {
+      type: String,
+    },
     name: {
       type: String,
       required: true,
@@ -22,6 +25,14 @@ const applySchema = new Schema(
       lowercase: true,
       unique: true,
       required: [true, "Email address is required"],
+    },
+    userEmail: {
+      type: String,
+      validate: [validator.isEmail, "Provide a valid Email"],
+      trim: true,
+      lowercase: true,
+      unique: true,
+      required: [true, "UserEmail address is required"],
     },
     contactNumber: {
       type: String,
@@ -36,6 +47,7 @@ const applySchema = new Schema(
     },
     uploadResume: {
       type: String,
+      required: true,
       validate: [validator.isURL, "Please provide a valid resume url"],
     },
     // jobPost: {

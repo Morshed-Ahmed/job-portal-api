@@ -1,3 +1,4 @@
+const Apply = require("../models/Apply");
 const Jobs = require("../models/Jobs");
 const {
   getJobService,
@@ -104,6 +105,23 @@ exports.jobApply = async (req, res) => {
     res.status(200).json({
       status: "Success",
       message: "Create an job post successful",
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "Fail",
+      massage: error.message,
+    });
+  }
+};
+
+exports.userAllayDetails = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await Apply.find({ postId: id });
+    res.status(200).json({
+      status: "Success",
+      data: result,
+      //  message: "Create an job post successful",
     });
   } catch (error) {
     res.status(400).json({
